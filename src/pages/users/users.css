@@ -1,0 +1,10 @@
+
+.MuiDataGrid-cell{
+    color: rgb(197, 184, 184);
+}
+
+.MuiDataGrid-footerContainer.MuiDataGrid-withBorderColor.css-wop1k0-MuiDataGrid-footerContainer {
+  /* Apply your custom styles */
+  
+  background-color: white; /* Example border color */
+}
