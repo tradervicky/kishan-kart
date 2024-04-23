@@ -9,6 +9,7 @@ const App = () => {
   return (
     <div className='bg-mixed-200'>
       <RoutesPages/>
+      
     </div>
   )
 }

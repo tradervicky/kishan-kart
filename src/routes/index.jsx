@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '../container/layout';
+import AddProduct from '../pages/addProduct';
 import Cards from '../pages/card';
 import Dashboard from '../pages/dashboard';
 import Login from '../pages/login';
@@ -21,6 +22,7 @@ const protectedRoutes = [
   { path: '/package', exact: true, component: Package },
   { path: '/cards', exact: true, component: Cards },
   { path: '/users', exact: true, component: Users },
+  { path: '/add-products', exact: true, component: AddProduct },
 ];
 
 const RoutesPages = () => {

@@ -10,7 +10,7 @@ export const useLangContext = () => {
 
 
 export const LanguageProvider = ({ children }) => {
-  const [lang, setLang] = useState(false);
+  const [lang, setLang] = useState(true);
 
   const hindi = () => {
     setLang(true)

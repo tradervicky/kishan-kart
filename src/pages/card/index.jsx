@@ -20,7 +20,7 @@ const columns = [
   {
     field: 'cardNo',
     headerName: 'Card No',
-    width: 200,
+    width: 300,
     editable: false,
   },
   
@@ -34,7 +34,7 @@ const columns = [
     field: 'amount',
     headerName: 'Amount',
     description: 'This column has a value getter and is not sortable.',
-    width: 150,
+    width: 200,
   },
   {
     field: 'active',

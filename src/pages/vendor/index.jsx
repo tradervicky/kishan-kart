@@ -32,7 +32,7 @@ const columns = [
     headerName: 'Address',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 300,
+    width: 400,
   },
   {
     field: 'action',

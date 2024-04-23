@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { MdOutlineSpaceDashboard, MdOutlineAddShoppingCart  } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { FaUsers, FaRegAddressCard} from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
@@ -50,6 +50,12 @@ const menuDashboard = [
             icon: <LiaShoppingBagSolid size={18}/>,
             toLink : "/products",
         },
+        {
+            title:"Add Product",
+            titleHindi:"उत्पाद जोड़ें",
+            icon: <MdOutlineAddShoppingCart size={18}/>,
+            toLink : "/add-products",
+        },
     ];
 
 
@@ -57,7 +63,7 @@ const menuDashboard = [
     return (
         <div>
             <ul>
-            <p className='text-custom-h6 text-mixed-600 p-4'>Menu</p>
+            <p className='text-custom-h6 text-mixed-600 p-2'>Menu</p>
                 {menuDashboard.map((data, index)=>
                 <li key={index}>
                     <NavLink to={data.toLink} className="flex p-4 items-center gap-4">
@@ -65,7 +71,7 @@ const menuDashboard = [
                     {lang ? data.title : data.titleHindi} 
                     </NavLink>
                 </li>)}
-                <p className='text-custom-h6 text-mixed-600 p-4'>Components</p>
+                <p className='text-custom-h6 text-mixed-600 p-2'>Components</p>
                 {menuForSideBar.map((data, index) => (
                     <li key={index} >
                         <NavLink to={data.toLink} className="flex p-4 items-center gap-4 text-custom-h6 font-medium" >
