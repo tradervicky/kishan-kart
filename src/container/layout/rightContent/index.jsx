@@ -2,7 +2,7 @@ import React from 'react'
 
 const RightContent = (props) => {
   return (
-    <div>{props.children}</div>
+    <div className='h-[85vh] overflow-hidden scroll-y overflow-y-scroll mt-4'>{props.children}</div>
   )
 }
 

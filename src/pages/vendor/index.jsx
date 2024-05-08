@@ -32,7 +32,7 @@ const columns = [
     headerName: 'Address',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 400,
+    width: 380,
   },
   {
     field: 'action',
@@ -40,13 +40,9 @@ const columns = [
     editable: true,
     flex: 1,
     renderCell: (params) => (
-      <div className="flex gap-1 text-sm font-semibold items-center ">
-        
+      <div className="flex gap-1 text-sm font-semibold items-center">
         <UserButton icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
-        <UserButton icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300"/>
-         
-        
-       
+        <UserButton icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300 px-4"/>
       </div>
     )
   },

@@ -6,7 +6,7 @@ import RightContent from './rightContent'
 
 const Layout = (props) => {
   return (
-    <div className='flex gap-3 w-full border border-red-500'>
+    <div className='flex gap-3 w-full'>
         <Leftbar/>
         <div className='flex flex-col flex-grow'>
             <Topbar/>

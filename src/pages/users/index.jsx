@@ -1,30 +1,35 @@
 import React from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
-import './users.css'
+import '../users/users.css'
 import UserButton from '../../components/userButton';
 import { CiViewList, CiEdit } from "react-icons/ci";
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FiShoppingCart, FiPlus } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+
+const Users = () => {
+const navigate = useNavigate()
+
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
     field: 'created',
     headerName: 'Created At',
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
     field: 'name',
     headerName: 'Name',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'mobile',
     headerName: 'Mobile',
     width: 110,
-    editable: true,
+    editable: false,
   },
   
   {
@@ -37,18 +42,15 @@ const columns = [
   {
     field: 'action',
     headerName: 'Action',
-    editable: true,
+    editable: false,
     flex: 1,
     renderCell: (params) => (
       <div className="flex gap-1 text-sm font-semibold items-center justify-center">
         
-        <UserButton icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
-        <UserButton icon={<LiaIdCardSolid size={20}/>} title="Cards" customStyle="text-[#DDA0DD]"/>
-        <UserButton icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/>
-        <UserButton icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300"/>
-         
-        
-       
+        <UserButton onClick={()=>handleClick('user-details/1')} icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
+        <UserButton onClick={()=>handleClick('/users/add-cards/1')} icon={<LiaIdCardSolid size={20}/>} title="Cards" customStyle="text-[#DDA0DD]"/>
+        <UserButton onClick={()=>handleClick('/users/get-invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/>
+        <UserButton onClick={()=>handleClick('user-details/1')} icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300"/>  
       </div>
     )
   },
@@ -58,7 +60,12 @@ const rows = [
 
 ];
 
-const USers = () => {
+const handleClick = (route)=>{
+  console.log("clicked")
+  navigate(route)  
+}
+
+
   return (
     <div className='mx-6 mt-3'>
       <div className='flex justify-between '>
@@ -88,4 +95,4 @@ const USers = () => {
   )
 }
 
-export default USers
+export default Users

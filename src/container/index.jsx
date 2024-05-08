@@ -4,7 +4,7 @@ import Topbar from './topbar'
 
 const Container = () => {
   return (
-    <div className='flex gap-3 w-full border border-red-500'>
+    <div className='flex gap-3 w-full'>
         <Leftbar/>
         <div className=' flex-grow'>
             <Topbar/>
