@@ -4,7 +4,7 @@ import RoutesPages from './routes'
 
 
 const App = () => {
-
+const token = localStorage.getItem('token')
   return (
     <div className='bg-mixed-200 '>
       <RoutesPages/>

@@ -9,6 +9,8 @@ import '../../../components/global/global.css';
 
 const Leftbar = () => {
   const { hindi, eng, lang } = useLangContext();
+
+  
   return (
     <div className='w-[220px]  bg-mixed-100 text-white mt-0 h-screen px-4 rounded-lg flex flex-col justify-between items-center pb-4'>
       <div className='flex justify-center flex-col items-center gap-2 pb-2 border-b-2'>
