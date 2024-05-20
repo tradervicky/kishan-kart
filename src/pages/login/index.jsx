@@ -15,7 +15,7 @@ const Login = () => {
     dispatch(checkAuth());
   }, [dispatch]);
 
-  console.log(authStatus,isAuthenticated,user,authError)
+  // console.log(authStatus,isAuthenticated,user,authError)
   
   const [formData, setFormData] = useState({
     email: '',
@@ -25,7 +25,8 @@ const Login = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault()
     dispatch(login(formData)).then((action) => {
-      if (action.meta.requestStatus === 'succeeded') {
+      console.log(action.meta.requestStatus)
+      if (action.meta.requestStatus === 'fulfilled') {
         navigate('/dashboard'); 
       }
     });

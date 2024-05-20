@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Invioce from '../components/invoice';
 import Layout from '../container/layout';
+import { checkAuth } from '../features/auth/authSlice';
 import AddProduct from '../pages/addProduct';
 import Cards from '../pages/card';
 import CardPage from '../pages/cardpage';
@@ -38,12 +40,25 @@ const protectedRoutes = [
   // { path: '/get-invoice/:id', element: <GetInvoice /> },
   { path: '/users/get-invoice/:id', element: <Invioce /> },
   { path: '/users/user-edit/:id', element: <UserUpdate /> },
+  { path: '*', element: <Dashboard /> },
   //inside add product
 ];
 
 const RoutesPages = () => {
+  //redux
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+  const authStatus = useSelector((state) => state.auth.status);
+  const authError = useSelector((state) => state.auth.error);
+  //states
   const [allRoutes, setAllRoutes] = useState([]);
-  let isLoggedIn = localStorage.getItem('token');
+  let isLoggedIn = isAuthenticated;
+
+  useEffect(()=>{
+    dispatch(checkAuth())
+  },[])
+
 
     useEffect(() => {
       if (isLoggedIn) {

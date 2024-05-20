@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import '../users/users.css'
@@ -7,10 +7,36 @@ import { CiViewList, CiEdit } from "react-icons/ci";
 import { LiaIdCardSolid } from "react-icons/lia";
 import { FiShoppingCart, FiPlus } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
+import { makeApiRequest } from '../../api/function';
+import { API_URLS } from '../../api/auth';
 
 const Users = () => {
 const navigate = useNavigate()
 
+const [users, setUsers] = useState([])
+// method, url, data = null, params = null
+const fetchUsers = async()=>{
+  try {
+    const response = await makeApiRequest("GET", API_URLS.VIEW_ALL_USER)
+    setUsers(response)
+    // console.log(response)
+  } catch (error) {
+    
+  }
+}
+useEffect(()=>{
+  fetchUsers()
+},[])
+console.log(users)
+const formatCreatedAt = (createdAt) => {
+  const date = new Date(createdAt);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${day}/${month}/${year}`;
+};
+const rows = users && users.map((data, index)=> ({id:index+1, created: formatCreatedAt(data.createdAt), name : data.name, mobile: data.mobile, email: data.email}))
+// { id: 1, created: '25/12/2023', name: 'Vicky Kumar Gupta', mobile: 7631648106, email : 'vickygupta031@test.in', action: "update delete" },
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
@@ -55,10 +81,10 @@ const columns = [
     )
   },
 ];
-const rows = [
-  { id: 1, created: '25/12/2023', name: 'Vicky Kumar Gupta', mobile: 7631648106, email : 'vickygupta031@test.in', action: "update delete" },
+// const rows = [
+//   { id: 1, created: '25/12/2023', name: 'Vicky Kumar Gupta', mobile: 7631648106, email : 'vickygupta031@test.in', action: "update delete" },
 
-];
+// ];
 
 const handleClick = (route)=>{
   console.log("clicked")
