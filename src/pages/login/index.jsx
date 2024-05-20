@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaKey } from "react-icons/fa6";
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { checkAuth, login } from '../../features/auth/authSlice';
 
 const Login = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+  const authStatus = useSelector((state) => state.auth.status);
+  const authError = useSelector((state) => state.auth.error);
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  console.log(authStatus,isAuthenticated,user,authError)
+  
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault()
+    dispatch(login(formData)).then((action) => {
+      if (action.meta.requestStatus === 'succeeded') {
+        navigate('/dashboard'); 
+      }
+    });
+
+  }
+
   const handleNavigate = ()=>{
     navigate('/register')
   }
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg.jpg')" }}>
+    <form onSubmit={handleSubmit} className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg.jpg')" }}>
       <div className="absolute inset-0 bg-black opacity-70">
         
       </div>
@@ -32,6 +60,7 @@ const Login = () => {
             id="username"
             type="text"
             placeholder="Enter your username"
+            onChange={(e)=>setFormData({...formData, email: e.target.value})}
           />
         </div>
         <div className="mb-6">
@@ -43,12 +72,13 @@ const Login = () => {
             id="password"
             type="password"
             placeholder="Enter your password"
+            onChange={(e)=>setFormData({...formData, password: e.target.value})}
           />
         </div>
         <div className="flex items-center justify-between">
           <button
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="button"
+            type="submit"
           >
             Login
           </button>
@@ -69,7 +99,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

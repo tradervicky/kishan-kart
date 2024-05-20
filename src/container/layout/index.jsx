@@ -5,7 +5,9 @@ import RightContent from './rightContent'
 
 
 const Layout = (props) => {
+  
   const isLoggedIn = localStorage.getItem('token');
+
   return (
     <>
       {isLoggedIn ? (
