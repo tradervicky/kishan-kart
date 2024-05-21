@@ -1,4 +1,5 @@
 // import React, { useContext } from 'react'
+import AddUser from './components/addUser'
 import { useLangContext } from './context/language'
 import RoutesPages from './routes'
 

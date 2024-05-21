@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import AddUser from '../components/addUser';
 import Invioce from '../components/invoice';
 import Layout from '../container/layout';
 import { checkAuth } from '../features/auth/authSlice';
@@ -15,6 +16,7 @@ import Products from '../pages/products';
 import Register from '../pages/register';
 import UserDetails from '../pages/userdetail';
 import Users from '../pages/users';
+import AddCustomer from '../pages/users/add';
 import UserUpdate from '../pages/userUpdate';
 import Vendors from '../pages/vendor';
 
@@ -38,10 +40,13 @@ const protectedRoutes = [
   { path: '/users/add-cards/:id', element: <CardPage /> },
   // { path: '/users/user-card/:id', element: <UserDetails /> },
   // { path: '/get-invoice/:id', element: <GetInvoice /> },
+  { path: '/vendors/add-vendor', element: <AddUser /> },
+  { path: '/users/add-user', element: <AddCustomer /> },
   { path: '/users/get-invoice/:id', element: <Invioce /> },
   { path: '/users/user-edit/:id', element: <UserUpdate /> },
   { path: '*', element: <Dashboard /> },
   //inside add product
+
 ];
 
 const RoutesPages = () => {

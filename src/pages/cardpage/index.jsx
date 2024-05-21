@@ -1,11 +1,36 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { API_URLS } from '../../api/auth'
+import { makeApiRequest } from '../../api/function'
 import UserButton from '../../components/userButton'
 import Cards from '../card'
+import UserCards from './userCard'
 
 const CardPage = () => {
+  const id = useParams();
   const [selectedCard, setSelectedCard] = useState("")
-  const  handleClick = ()=>{
-    setSelectedCard("")
+  let cardbalance = 0
+  selectedCard === "gold" ? cardbalance = 10000 : selectedCard === "platinum" ? cardbalance = 25000 : selectedCard === "diamond" ? cardbalance = 50000 : ""
+  // console.log(cardbalance)
+  const [cardData , setCardData] = useState({
+    balance: cardbalance || null,
+    user: id?.id || "",
+    cardType: selectedCard
+  })
+  console.log(cardData)
+  useEffect(()=>{
+    setCardData({...cardData , balance: cardbalance, cardType: selectedCard})
+  },[selectedCard])
+
+  const  handleAddCard = async ()=>{
+    try {
+      const response = await makeApiRequest("POST", API_URLS.ADD_CARD, cardData)
+      console.log(response)
+      setSelectedCard("")
+    } catch (error) {
+      console.error(error)
+    }
   }
   return (
     <div className='mt-4 h-full'>
@@ -21,9 +46,10 @@ const CardPage = () => {
         </div>    
       </div>
       <div className='flex justify-center mt-2'>
-        <UserButton title="Add card" customStyle="rounded-lg bg-primary-200 outline-none text-lg font-semibold text-white px-4 py-2 hover:bg-primary-300" onClick={handleClick}/>
+        <UserButton title="Add card" customStyle="rounded-lg bg-primary-200 outline-none text-lg font-semibold text-white px-4 py-2 hover:bg-primary-300" onClick={handleAddCard}/>
       </div>
-      <Cards/>
+      {/* <Cards/> */}
+      <UserCards/>
       
     </div>
   )

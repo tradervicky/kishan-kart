@@ -21,7 +21,7 @@ const fetchUsers = async()=>{
     setUsers(response)
     // console.log(response)
   } catch (error) {
-    
+    console.error(error)
   }
 }
 useEffect(()=>{
@@ -35,7 +35,7 @@ const formatCreatedAt = (createdAt) => {
   const day = String(date.getDate()).padStart(2, '0');
   return `${day}/${month}/${year}`;
 };
-const rows = users && users.map((data, index)=> ({id:index+1, created: formatCreatedAt(data.createdAt), name : data.name, mobile: data.mobile, email: data.email}))
+const rows = users && users.map((data, index)=> ({id:index+1, userId:data._id, created: formatCreatedAt(data.createdAt), name : data.name, mobile: data.mobile, email: data.email}))
 // { id: 1, created: '25/12/2023', name: 'Vicky Kumar Gupta', mobile: 7631648106, email : 'vickygupta031@test.in', action: "update delete" },
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -73,8 +73,8 @@ const columns = [
     renderCell: (params) => (
       <div className="flex gap-1 text-sm font-semibold items-center justify-center">
         
-        <UserButton onClick={()=>handleClick('user-details/1')} icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
-        <UserButton onClick={()=>handleClick('/users/add-cards/1')} icon={<LiaIdCardSolid size={20}/>} title="Cards" customStyle="text-[#DDA0DD]"/>
+        <UserButton onClick={()=>handleClick(`user-details/${params.row.userId}`)} icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
+        <UserButton onClick={()=>handleClick(`/users/add-cards/${params.row.userId}`)} icon={<LiaIdCardSolid size={20}/>} title="Cards" customStyle="text-[#DDA0DD]"/>
         <UserButton onClick={()=>handleClick('/users/get-invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/>
         <UserButton onClick={()=>handleClick('user-details/1')} icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300"/>  
       </div>
@@ -98,11 +98,11 @@ const handleClick = (route)=>{
         <div>
         <input type="text" placeholder='Search By Name' className='px-4 py-2 rounded-lg outline-none' />
         </div>
-        <button className='border px-4 py-2 rounded-lg text-white mb-2'>
+        <button className='border px-4 py-2 rounded-lg text-white mb-2' onClick={()=>navigate('/users/add-user')} >
         <FiPlus size={24}/>
         </button>
       </div>
-    <Box sx={{ height: 400, width: '100%' }} >
+    <Box sx={{ height: 570, width: '100%' }} >
       <DataGrid
         rows={rows}
         columns={columns}
