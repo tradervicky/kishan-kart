@@ -1,7 +1,21 @@
 import React from 'react'
 import InputBox from '../input'
 
-const AddUser = ({mainTitle}) => {
+const AddUser = () => {
+  const [vendorDetails, setVendorDetails] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
+    dateOfBirth: "",
+    vendorCode : "",
+    gstIn: "",
+    address: "",
+    panCard: null,
+    aadharCard: null,
+    businessDoc: null,
+  });
+
     
  
   return (

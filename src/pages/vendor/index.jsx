@@ -17,7 +17,7 @@ const Vendors = () => {
   const navigate = useNavigate()
   const fetchVendors = async ()=>{
     try {
-      const response = await makeApiRequest("GET", API_URLS.VIEW_ALL_USER)
+      const response = await makeApiRequest("GET", API_URLS.GET_VENDOR_LIST)
       console.log(response)
       setVendors(response)
     } catch (error) {
@@ -63,13 +63,13 @@ const Vendors = () => {
       flex: 1,
       renderCell: (params) => (
         <div className="flex gap-1 text-sm font-semibold items-center">
-          <UserButton icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
+          <UserButton icon={<CiViewList size={20}/>} onClick={()=>navigate(`/vendors/${params.row.userId}`)} title="Details" customStyle="text-green-500"/>
           <UserButton icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300 px-4"/>
         </div>
       )
     },
   ];
-  const rows = vendors.map((data,index)=>({id: index+1, name : data.name, email: data.email, mobile: data.mobile, address : data.address}))
+  const rows = vendors.map((data,index)=>({id: index+1, userId:data._id, name : data.name, email: data.email, mobile: data.mobile, address : data.address}))
   // const rows = [
   //   { id: 1, name: 'Vicky kumar Gupta', email: 'vickygupta031@gmail.com', mobile: 7631648106, address : 'Vill Mathiya, Siwan' },
   // ];

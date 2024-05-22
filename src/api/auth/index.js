@@ -4,6 +4,7 @@ export const API_URLS = {
     SIGNUP : '/api/auth/signup',
     //vendor
     GET_VENDOR_LIST : "/api/vendors",
+    GET_VENDOR_BY_ID : "/api/vendors/",
     //products
     GET_ALL_PRODUCTS : "/api/products",
     //users

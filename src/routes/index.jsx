@@ -19,6 +19,7 @@ import Users from '../pages/users';
 import AddCustomer from '../pages/users/add';
 import UserUpdate from '../pages/userUpdate';
 import Vendors from '../pages/vendor';
+import VendorDetails from '../pages/vendor/vendorDetails';
 
 const openRoutes = [
   { path: '/', element: <Login /> },
@@ -37,6 +38,7 @@ const protectedRoutes = [
   { path: '/add-products', element: <AddProduct /> },
   //inside user page
   { path: '/users/user-details/:id', element: <UserDetails /> },
+  { path: '/vendors/:id', element: <VendorDetails /> },
   { path: '/users/add-cards/:id', element: <CardPage /> },
   // { path: '/users/user-card/:id', element: <UserDetails /> },
   // { path: '/get-invoice/:id', element: <GetInvoice /> },
