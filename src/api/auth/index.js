@@ -5,6 +5,7 @@ export const API_URLS = {
     //vendor
     GET_VENDOR_LIST : "/api/vendors",
     GET_VENDOR_BY_ID : "/api/vendors/",
+    ADD_VENDOR : "/api/vendors/create",
     //products
     GET_ALL_PRODUCTS : "/api/products",
     //users

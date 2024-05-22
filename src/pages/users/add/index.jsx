@@ -21,7 +21,7 @@ const AddCustomer = () => {
     if (type === 'file') {
       setUserDetails({
         ...userDetails,
-        [name]: files[0] // Store the file object directly
+        [name]: files[0] 
       });
     } else {
       setUserDetails({
@@ -32,7 +32,7 @@ const AddCustomer = () => {
   };
 
   
-  console.log(userDetails)
+  
 
 
   const handleSubmit = async (e) => {
