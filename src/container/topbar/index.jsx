@@ -1,8 +1,16 @@
 import { IoPersonOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
 const Topbar = () => {
   const params = useParams()
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+  const authStatus = useSelector((state) => state.auth.status);
+  const authError = useSelector((state) => state.auth.error);
+  console.log(user)
   console.log(params)
   return (
     <div>
@@ -20,7 +28,7 @@ const Topbar = () => {
 
            <IoPersonOutline size={24} className="cursor-pointer"/>
             </div>
-           <p className="text-custom-h6 font-semibold text-white">Vicky The Admin</p> 
+           <p className="text-custom-h6 font-semibold text-white">{user && user.user.name}</p> 
         </div>
     </div>
     <div className="bg-mixed-300  h-10 mx-6  flex items-center pl-6">

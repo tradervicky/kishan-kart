@@ -6,10 +6,23 @@ import { useLangContext } from '../../../context/language';
 
 // Importing global.css
 import '../../../components/global/global.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../../features/auth/authSlice';
 
 const Leftbar = () => {
   const { hindi, eng, lang } = useLangContext();
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+  const authStatus = useSelector((state) => state.auth.status);
+  const authError = useSelector((state) => state.auth.error);
 
+  const handleLogout = ()=>{
+    dispatch(logout())
+    navigate('/')
+  }
   
   return (
     <div className='w-[220px]  bg-mixed-100 text-white mt-0 h-screen px-4 rounded-lg flex flex-col justify-between items-center pb-4'>
@@ -25,7 +38,7 @@ const Leftbar = () => {
         <MenuSideBar lang={lang} />
       </div>
       <div>
-        <button className='px-6 py-3 mb-2 bg-primary-200 rounded-lg text-custom-h6 font-semibold hover:bg-primary-100 ease-in-out duration-300'>
+        <button onClick={handleLogout} className='px-6 py-3 mb-2 bg-primary-200 rounded-lg text-custom-h6 font-semibold hover:bg-primary-100 ease-in-out duration-300'>
           {lang ? "Log out" : "लॉग आउट"}
         </button>
       </div>
