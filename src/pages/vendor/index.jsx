@@ -54,7 +54,7 @@ const Vendors = () => {
       headerName: 'Address',
       description: 'This column has a value getter and is not sortable.',
       sortable: false,
-      width: 380,
+      width: 470,
     },
     {
       field: 'action',
@@ -64,7 +64,6 @@ const Vendors = () => {
       renderCell: (params) => (
         <div className="flex gap-1 text-sm font-semibold items-center">
           <UserButton icon={<CiViewList size={20}/>} onClick={()=>navigate(`/vendors/${params.row.userId}`)} title="Details" customStyle="text-green-500"/>
-          <UserButton icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300 px-4"/>
         </div>
       )
     },

@@ -54,7 +54,7 @@ const columns = [
   {
     field: 'mobile',
     headerName: 'Mobile',
-    width: 110,
+    width: 150,
     editable: false,
   },
   
@@ -63,7 +63,7 @@ const columns = [
     headerName: 'Email',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 250,
+    width: 300,
   },
   {
     field: 'action',
@@ -71,12 +71,10 @@ const columns = [
     editable: false,
     flex: 1,
     renderCell: (params) => (
-      <div className="flex gap-1 text-sm font-semibold items-center justify-center">
-        
+      <div className="flex gap-1 text-sm font-semibold items-center">   
         <UserButton onClick={()=>handleClick(`user-details/${params.row.userId}`)} icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
         <UserButton onClick={()=>handleClick(`/users/add-cards/${params.row.userId}`)} icon={<LiaIdCardSolid size={20}/>} title="Cards" customStyle="text-[#DDA0DD]"/>
-        <UserButton onClick={()=>handleClick('/users/get-invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/>
-        <UserButton onClick={()=>handleClick('user-details/1')} icon={<CiEdit size={20}/>} title="Edit" customStyle="text-blue-300"/>  
+        <UserButton onClick={()=>handleClick('/users/get-invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/> 
       </div>
     )
   },

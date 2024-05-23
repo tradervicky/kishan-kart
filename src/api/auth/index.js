@@ -6,6 +6,7 @@ export const API_URLS = {
     GET_VENDOR_LIST : "/api/vendors",
     GET_VENDOR_BY_ID : "/api/vendors/",
     ADD_VENDOR : "/api/vendors/create",
+    UPDATE_VENDOR : "/api/vendors/update/",
     //products
     GET_ALL_PRODUCTS : "/api/products",
     ADD_PRODUCT : "/api/products/add-product",
@@ -13,7 +14,7 @@ export const API_URLS = {
     ADD_USER : "/api/users/create",
     VIEW_ALL_USER : "/api/users/views",
     VIEW_USER_BY_ID : "/api/users/views/",
-    UPDATE_USER : "/api/users/update/:id",
+    UPDATE_USER : "/api/users/update/",
     DELETE_USER : "/api/users/delete/:id",
 
     // cards

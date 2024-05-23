@@ -40,12 +40,14 @@ const protectedRoutes = [
   { path: '/users/user-details/:id', element: <UserDetails /> },
   { path: '/vendors/:id', element: <VendorDetails /> },
   { path: '/users/add-cards/:id', element: <CardPage /> },
+  { path: '/users/update/:id', element: <AddCustomer /> },
+
   // { path: '/users/user-card/:id', element: <UserDetails /> },
   // { path: '/get-invoice/:id', element: <GetInvoice /> },
   { path: '/vendors/add-vendor', element: <AddUser /> },
   { path: '/users/add-user', element: <AddCustomer /> },
   { path: '/users/get-invoice/:id', element: <Invioce /> },
-  { path: '/users/user-edit/:id', element: <UserUpdate /> },
+  { path: '/users/user-edit/:id', element: <AddUser /> },
   { path: '*', element: <Dashboard /> },
   //inside add product
   // { path: '/add-product' element: </> },

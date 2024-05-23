@@ -5,11 +5,11 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { CiMail } from "react-icons/ci";
 import { PiGenderIntersexLight } from "react-icons/pi";
 import { SlCalender } from "react-icons/sl";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { makeApiRequest } from "../../../api/function";
 import { API_URLS } from "../../../api/auth";
 const VendorDetails = () => {
-  
+  const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState([])
   const id = useParams()
   // console.log(id)
@@ -40,7 +40,7 @@ const VendorDetails = () => {
             </h2>
           </div>
           <div className="mt-7 flex flex-row">
-            <button className="flex gap-2 bg-slate-400 py-2 px-4 rounded-md text-white font-semibold hover:bg-slate-500 hover:duration-500 hover:scale-105 shadow-xl hover:shadow-2xl">
+            <button className="flex gap-2 bg-slate-400 py-2 px-4 rounded-md text-white font-semibold hover:bg-slate-500 hover:duration-500 hover:scale-105 shadow-xl hover:shadow-2xl" onClick={()=>navigate(`/users/user-edit/${id.id}`)}>
               <FaRegEdit size={22} />
               Edit Profile
             </button>

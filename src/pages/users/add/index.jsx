@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { API_URLS } from '../../../api/auth';
 import { makeApiRequest } from '../../../api/function';
 import InputBox from '../../../components/input';
@@ -15,13 +16,40 @@ const AddCustomer = () => {
     panCard: null,
     aadharCard: null,
   });
+  const { id } = useParams();
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  const fetchUdateCustomer = async () => {
+    try {
+      const response = await makeApiRequest("GET", `${API_URLS.VIEW_USER_BY_ID}${id}`);
+      console.log(response);
+      setUserDetails({
+        name: response.name,
+        email: response.email,
+        mobile: response.mobile,
+        password: response.password,
+        dateOfBirth: response.dateOfBirth,
+        gender: response.gender,
+        address: response.address,
+      });
+      setIsUpdate(true);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      fetchUdateCustomer();
+    }
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
       setUserDetails({
         ...userDetails,
-        [name]: files[0] 
+        [name]: files[0]
       });
     } else {
       setUserDetails({
@@ -30,10 +58,6 @@ const AddCustomer = () => {
       });
     }
   };
-
-  
-  
-
 
   const handleSubmit = async (e) => {
     const formData = new FormData();
@@ -49,10 +73,37 @@ const AddCustomer = () => {
     formData.append("aadharCard", userDetails.aadharCard);
 
     try {
-     const response = await makeApiRequest("POST", API_URLS.ADD_USER, formData, null ,  {
-      'Content-Type': 'multipart/form-data',
-    })
-     console.log(response)
+      const response = await makeApiRequest("POST", API_URLS.ADD_USER, formData, null, {
+        'Content-Type': 'multipart/form-data',
+      });
+      console.log(response);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleUpdate = async (e) => {
+    const formData = new FormData();
+
+    formData.append("name", userDetails.name);
+    formData.append("email", userDetails.email);
+    formData.append("mobile", userDetails.mobile);
+    formData.append("password", userDetails.password);
+    formData.append("dateOfBirth", userDetails.dateOfBirth);
+    formData.append("gender", userDetails.gender);
+    formData.append("address", userDetails.address);
+    if (userDetails.panCard) {
+      formData.append("panCard", userDetails.panCard);
+    }
+    if (userDetails.aadharCard) {
+      formData.append("aadharCard", userDetails.aadharCard);
+    }
+
+    try {
+      const response = await makeApiRequest("PUT", `${API_URLS.UPDATE_USER}${id}`, formData, null, {
+        'Content-Type': 'multipart/form-data',
+      });
+      console.log(response);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -60,7 +111,7 @@ const AddCustomer = () => {
 
   return (
     <div className='p-6 border-red-500'>
-      <h3 className='underline text-xl font-medium text-green-300'>Create User</h3>
+      <h3 className='underline text-xl font-medium text-green-300'>{isUpdate ? 'Update User' : 'Create User'}</h3>
       <div className='flex gap-4 w-[100%] mt-2'>
         <InputBox label="Full name" name="name" value={userDetails.name} onChange={handleChange} placeholder="Enter full name" customStyle="outline-none text-lg" />
         <InputBox label="Email" type="email" name="email" value={userDetails.email} onChange={handleChange} placeholder="Enter email" customStyle="outline-none text-lg" />
@@ -85,15 +136,19 @@ const AddCustomer = () => {
       <div className='flex gap-4 w-[100%] mt-2'>
         <InputBox label="Address" placeholder="Enter address" value={userDetails.address} onChange={handleChange} name="address" customStyle="outline-none text-lg" />
       </div>
-      <div className='flex gap-4 w-[100%] mt-4'>
-        <InputBox label="Upload Pan card" type="file" name="panCard" onChange={handleChange} customStyle="outline-none text-lg text-white" />
-        <InputBox label="Upload Aadhar card" type="file" name="aadharCard" onChange={handleChange} customStyle="outline-none text-lg text-white" />
-      </div>
+      {!isUpdate && (
+        <div className='flex gap-4 w-[100%] mt-4'>
+          <InputBox label="Upload Pan card" type="file" name="panCard" onChange={handleChange} customStyle="outline-none text-lg text-white" />
+          <InputBox label="Upload Aadhar card" type="file" name="aadharCard" onChange={handleChange} customStyle="outline-none text-lg text-white" />
+        </div>
+      )}
       <div className='flex justify-end pr-4 mt-4'>
-        <button className='px-4 py-2 rounded text-lg bg-green-300 outline-none hover:bg-green-500 duration-300 ease-in-out' onClick={handleSubmit}>Submit</button>
+        <button className='px-4 py-2 rounded text-lg bg-green-300 outline-none hover:bg-green-500 duration-300 ease-in-out' onClick={isUpdate ? handleUpdate : handleSubmit}>
+          {isUpdate ? 'Update' : 'Submit'}
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default AddCustomer;
