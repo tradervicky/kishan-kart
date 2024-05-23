@@ -48,6 +48,7 @@ const protectedRoutes = [
   { path: '/users/user-edit/:id', element: <UserUpdate /> },
   { path: '*', element: <Dashboard /> },
   //inside add product
+  // { path: '/add-product' element: </> },
 
 ];
 

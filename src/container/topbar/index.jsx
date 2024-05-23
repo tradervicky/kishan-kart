@@ -28,7 +28,7 @@ const Topbar = () => {
 
            <IoPersonOutline size={24} className="cursor-pointer"/>
             </div>
-           <p className="text-custom-h6 font-semibold text-white">{user && user.user.name}</p> 
+           <p className="text-custom-h6 font-semibold text-white">{user && user?.user.name}</p> 
         </div>
     </div>
     <div className="bg-mixed-300  h-10 mx-6  flex items-center pl-6">

@@ -8,6 +8,7 @@ export const API_URLS = {
     ADD_VENDOR : "/api/vendors/create",
     //products
     GET_ALL_PRODUCTS : "/api/products",
+    ADD_PRODUCT : "/api/products/add-product",
     //users
     ADD_USER : "/api/users/create",
     VIEW_ALL_USER : "/api/users/views",

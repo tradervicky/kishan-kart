@@ -22,6 +22,13 @@ const Login = () => {
     password: ''
   });
 
+  const handleSetGuestCredentials = ()=>{
+    setFormData({
+      email: 'vicky@test.in',
+    password: 'vicky123'
+    })
+  }
+
   const handleSubmit = async (e)=>{
     e.preventDefault()
     dispatch(login(formData)).then((action) => {
@@ -43,7 +50,7 @@ const Login = () => {
       </div>
       <div className="relative bg-white bg-opacity-25 p-8 rounded-lg shadow-lg max-w-md w-full">
       <div className='absolute bg-gray-400 w-[80px] h-[80px] flex justify-center items-center rounded-full top-2 left-2 cursor-pointer'>
-          <h2 className="text-lg font-semibold text-white flex flex-col justify-center items-center p-2">
+          <h2 className="text-lg font-semibold text-white flex flex-col justify-center items-center p-2" onClick={handleSetGuestCredentials}>
             <span className='text-yellow-400'><FaKey size={22}/></span>
             Guest
           </h2>
@@ -59,7 +66,8 @@ const Login = () => {
           <input
             className="w-full px-3 py-2 text-gray-700 leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             id="username"
-            type="text"
+            type="email"
+            value={formData.email}
             placeholder="Enter your username"
             onChange={(e)=>setFormData({...formData, email: e.target.value})}
           />
@@ -72,6 +80,7 @@ const Login = () => {
             className="w-full px-3 py-2 mb-3 text-gray-700 leading-tight border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
+            value={formData.password}
             placeholder="Enter your password"
             onChange={(e)=>setFormData({...formData, password: e.target.value})}
           />
