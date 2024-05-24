@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Vendors = () => {
   const [vendors, setVendors] = useState([])
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate()
   const fetchVendors = async ()=>{
     try {
@@ -27,6 +28,14 @@ const Vendors = () => {
   useEffect(()=>{
     fetchVendors()
   },[])
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredVendors = vendors.filter(vendor =>
+    vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -68,15 +77,23 @@ const Vendors = () => {
       )
     },
   ];
-  const rows = vendors.map((data,index)=>({id: index+1, userId:data._id, name : data.name, email: data.email, mobile: data.mobile, address : data.address}))
-  // const rows = [
-  //   { id: 1, name: 'Vicky kumar Gupta', email: 'vickygupta031@gmail.com', mobile: 7631648106, address : 'Vill Mathiya, Siwan' },
-  // ];
+  // const rows = vendors.map((data,index)=>({id: index+1, userId:data._id, name : data.name, email: data.email, mobile: data.mobile, address : data.address}))
+
+  const rows = filteredVendors.map((data, index) => ({
+    id: index + 1,
+    userId: data._id,
+    name: data.name,
+    email: data.email,
+    mobile: data.mobile,
+    address: data.address
+  }));
+  
   return (
     <div className='mx-6 mt-3'>
       <div className='flex justify-between '>
         <div>
-        <input type="text" placeholder='Search By Name' className='px-4 py-2 rounded-lg outline-none' />
+        <input type="text" placeholder='Search By Name' className='px-4 py-2 rounded-lg outline-none' value={searchTerm}
+            onChange={handleSearch} />
         </div>
         <button className='border px-4 py-2 rounded-lg text-white mb-2' onClick={()=>navigate('/vendors/add-vendor')}>
         <FiPlus size={24}/>

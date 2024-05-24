@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { API_URLS } from '../../api/auth';
 import { makeApiRequest } from '../../api/function';
 import InputBox from '../input';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddUser = () => {
   const { id } = useParams();
@@ -44,7 +45,7 @@ const AddUser = () => {
       Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
       });
-
+      toast.loading(!isUpdate ? 'Adding...':'Updating...', { id: 'adding' });
       try {
         const response = await makeApiRequest(
           isUpdate ? 'PUT' : 'POST',
@@ -53,9 +54,14 @@ const AddUser = () => {
           null,
           { 'Content-Type': 'multipart/form-data' }
         );
+        toast.dismiss('adding');
+        if(response){
+          toast.success(isUpdate ? "Vendor updated with new data" : "Added a new vendor")
+        }
         console.log(response);
       } catch (error) {
-        console.error('Error:', error);
+        toast.dismiss('adding');
+        toast.error(error.message || 'An error occurred while processing your request.');
       }
     },
   });
@@ -74,9 +80,6 @@ const AddUser = () => {
             vendorCode: response.vendorCode,
             gstIn: response.gstIn,
             address: response.address,
-            panCard: null,
-            aadharCard: null,
-            businessDoc: null,
           });
           setIsUpdate(true);
         } catch (error) {
@@ -92,6 +95,7 @@ const AddUser = () => {
     <div className='p-6 border-red-500'>
       <h3 className='underline text-xl font-medium text-green-300'>{!isUpdate ? 'Create' : 'Update'} Vendor</h3>
       <form onSubmit={formik.handleSubmit}>
+        <Toaster/>
         <div className='flex gap-4 w-[100%] mt-2'>
           <InputBox
             label='Vendor Code'

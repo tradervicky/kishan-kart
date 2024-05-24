@@ -5,6 +5,7 @@ import { makeApiRequest } from '../../../api/function';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import InputBox from '../../../components/input';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddCustomer = () => {
   const { id } = useParams();
@@ -36,12 +37,11 @@ const AddCustomer = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      // Handle form submission logic here
       const formData = new FormData();
       Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
       });
-
+      toast.loading(!isUpdate ? 'Adding...':'Updating...', { id: 'adding' });
       try {
         
           const response = await makeApiRequest(
@@ -51,6 +51,10 @@ const AddCustomer = () => {
               null, {
             'Content-Type': 'multipart/form-data',
           });
+          toast.dismiss('adding');
+          if(response){
+            toast.success(isUpdate ? "User updated with new data" : "Added a new User")
+          }
           console.log(response);
         } 
         //   const response = await makeApiRequest('POST', API_URLS.ADD_USER, formData, null, {
@@ -60,7 +64,8 @@ const AddCustomer = () => {
         // }
       // }
        catch (error) {
-        console.error('Error:', error);
+        toast.dismiss('adding');
+        toast.error(error.message || 'An error occurred while processing your request.');
       }
     },
   });
@@ -94,6 +99,7 @@ const AddCustomer = () => {
     <div className='p-6 border-red-500'>
       <h3 className='underline text-xl font-medium text-green-300'>{isUpdate ? 'Update User' : 'Create User'}</h3>
       <form onSubmit={formik.handleSubmit}>
+      <Toaster/>
         <div className='flex gap-4 w-[100%] mt-2'>
           <InputBox
             label='Full name'

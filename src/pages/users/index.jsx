@@ -14,6 +14,7 @@ const Users = () => {
 const navigate = useNavigate()
 
 const [users, setUsers] = useState([])
+const [searchTerm, setSearchTerm] = useState('');
 // method, url, data = null, params = null
 const fetchUsers = async()=>{
   try {
@@ -27,6 +28,14 @@ const fetchUsers = async()=>{
 useEffect(()=>{
   fetchUsers()
 },[])
+const handleSearch = (e) => {
+  setSearchTerm(e.target.value);
+};
+const filteredUsers = users.filter(user =>
+  user.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+
 // console.log(users)
 const formatCreatedAt = (createdAt) => {
   const date = new Date(createdAt);
@@ -35,7 +44,11 @@ const formatCreatedAt = (createdAt) => {
   const day = String(date.getDate()).padStart(2, '0');
   return `${day}/${month}/${year}`;
 };
-const rows = users && users.map((data, index)=> ({id:index+1, userId:data._id, created: formatCreatedAt(data.createdAt), name : data.name, mobile: data.mobile, email: data.email}))
+// const rows = users && users.map((data, index)=> ({id:index+1, userId:data._id, created: formatCreatedAt(data.createdAt), name : data.name, mobile: data.mobile, email: data.email}))
+
+const rows = filteredUsers.map((data, index)=>({
+  id:index+1, userId:data._id, created: formatCreatedAt(data.createdAt), name : data.name, mobile: data.mobile, email: data.email
+}))
 // { id: 1, created: '25/12/2023', name: 'Vicky Kumar Gupta', mobile: 7631648106, email : 'vickygupta031@test.in', action: "update delete" },
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -94,7 +107,8 @@ const handleClick = (route)=>{
     <div className='mx-6 mt-3'>
       <div className='flex justify-between '>
         <div>
-        <input type="text" placeholder='Search By Name' className='px-4 py-2 rounded-lg outline-none' />
+        <input type="text" placeholder='Search By Name' className='px-4 py-2 rounded-lg outline-none' value={searchTerm}
+            onChange={handleSearch} />
         </div>
         <button className='border px-4 py-2 rounded-lg text-white mb-2' onClick={()=>navigate('/users/add-user')} >
         <FiPlus size={24}/>

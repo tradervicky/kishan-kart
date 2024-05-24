@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { FaKey } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -29,22 +30,28 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    toast.loading('Logging in...', { id: 'login' });
     dispatch(login(formData)).then((action) => {
-      console.log(action.meta.requestStatus)
+      toast.dismiss('login');
       if (action.meta.requestStatus === 'fulfilled') {
-        navigate('/dashboard'); 
+        toast.success("Logged in Successfully");
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1000);
+      } else {
+        toast.error("Login Failed. Please check your credentials.");
       }
     });
-
-  }
+  };
 
   const handleNavigate = ()=>{
     navigate('/register')
   }
   return (
     <form onSubmit={handleSubmit} className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg.jpg')" }}>
+      <Toaster/>
       <div className="absolute inset-0 bg-black opacity-70">
         
       </div>
