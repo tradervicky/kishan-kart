@@ -10,8 +10,8 @@ const Topbar = () => {
   const user = useSelector((state) => state.auth.user);
   const authStatus = useSelector((state) => state.auth.status);
   const authError = useSelector((state) => state.auth.error);
-  console.log(user)
-  console.log(params)
+  // console.log(user)
+  // console.log(params)
   return (
     <div>
     <div className="bg-mixed-200  flex justify-between h-16 items-center px-6">

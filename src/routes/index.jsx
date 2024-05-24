@@ -47,7 +47,7 @@ const protectedRoutes = [
   { path: '/vendors/add-vendor', element: <AddUser /> },
   { path: '/users/add-user', element: <AddCustomer /> },
   { path: '/users/get-invoice/:id', element: <Invioce /> },
-  { path: '/users/user-edit/:id', element: <AddUser /> },
+  { path: '/vendors/vendors-edit/:id', element: <AddUser /> },
   { path: '*', element: <Dashboard /> },
   //inside add product
   // { path: '/add-product' element: </> },

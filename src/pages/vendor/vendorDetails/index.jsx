@@ -40,7 +40,7 @@ const VendorDetails = () => {
             </h2>
           </div>
           <div className="mt-7 flex flex-row">
-            <button className="flex gap-2 bg-slate-400 py-2 px-4 rounded-md text-white font-semibold hover:bg-slate-500 hover:duration-500 hover:scale-105 shadow-xl hover:shadow-2xl" onClick={()=>navigate(`/users/user-edit/${id.id}`)}>
+            <button className="flex gap-2 bg-slate-400 py-2 px-4 rounded-md text-white font-semibold hover:bg-slate-500 hover:duration-500 hover:scale-105 shadow-xl hover:shadow-2xl" onClick={()=>navigate(`/vendors/vendors-edit/${id.id}`)}>
               <FaRegEdit size={22} />
               Edit Profile
             </button>

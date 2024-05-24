@@ -27,7 +27,7 @@ const fetchUsers = async()=>{
 useEffect(()=>{
   fetchUsers()
 },[])
-console.log(users)
+// console.log(users)
 const formatCreatedAt = (createdAt) => {
   const date = new Date(createdAt);
   const year = date.getFullYear();

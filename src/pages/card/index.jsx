@@ -14,7 +14,7 @@ const Cards = () => {
   const fetchCards = async ()=>{
     try {
       const response = await makeApiRequest("GET", API_URLS.VIEW_ALL_CARDS)
-      console.log(response)
+      // console.log(response)
       setCards(response)
     } catch (error) {
       console.error(error)

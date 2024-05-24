@@ -18,7 +18,7 @@ const Vendors = () => {
   const fetchVendors = async ()=>{
     try {
       const response = await makeApiRequest("GET", API_URLS.GET_VENDOR_LIST)
-      console.log(response)
+      // console.log(response)
       setVendors(response)
     } catch (error) {
       console.error(error)
