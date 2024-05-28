@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../features/auth/authSlice';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ const Register = () => {
       role : "Admin"
     };
     dispatch(register(userInfo)).then((action) => {
+      console.log(action.meta)
       if (action.meta.requestStatus === 'fulfilled') {
+        toast.success("User Registerd successfully")
         navigate('/');
       }
     });

@@ -9,6 +9,7 @@ import { FiShoppingCart, FiPlus } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { makeApiRequest } from '../../api/function';
 import { API_URLS } from '../../api/auth';
+import { hideLoader, showLoader } from '../../components/loader';
 
 const Users = () => {
 const navigate = useNavigate()
@@ -17,9 +18,11 @@ const [users, setUsers] = useState([])
 const [searchTerm, setSearchTerm] = useState('');
 // method, url, data = null, params = null
 const fetchUsers = async()=>{
+  showLoader()
   try {
     const response = await makeApiRequest("GET", API_URLS.VIEW_ALL_USER)
     setUsers(response)
+    hideLoader()
     // console.log(response)
   } catch (error) {
     console.error(error)

@@ -9,6 +9,7 @@ import '../../../components/global/global.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../features/auth/authSlice';
+import { hideLoader, showLoader } from '../../../components/loader';
 
 const Leftbar = () => {
   const { hindi, eng, lang } = useLangContext();
@@ -19,8 +20,10 @@ const Leftbar = () => {
   const authStatus = useSelector((state) => state.auth.status);
   const authError = useSelector((state) => state.auth.error);
 
-  const handleLogout = ()=>{
+  const handleLogout =  ()=>{
+    showLoader()
     dispatch(logout())
+    hideLoader()
     navigate('/')
   }
   

@@ -3,6 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react'
 import { API_URLS } from '../../api/auth';
 import { makeApiRequest } from '../../api/function';
+import { hideLoader, showLoader } from '../../components/loader';
 import UserButton from '../../components/userButton';
 
 
@@ -12,9 +13,11 @@ const Cards = () => {
   const [cards, setCards] = useState([])
   const [cardForUpdate, setCardForUpdate] = useState([])
   const fetchCards = async ()=>{
+    console.log(showLoader())
     try {
       const response = await makeApiRequest("GET", API_URLS.VIEW_ALL_CARDS)
       // console.log(response)
+      hideLoader()
       setCards(response)
     } catch (error) {
       console.error(error)
@@ -26,10 +29,11 @@ const Cards = () => {
   }, [])
 
   const handleUpdateStatus = async(id,newStatus)=>{
-
+    showLoader()
     try {
       const response = await makeApiRequest("PUT", `${API_URLS.UPDATE_CARD}${id}`, { isActivated: newStatus })
       fetchCards();
+      hideLoader()
     } catch (error) {
       console.error(error)
     }

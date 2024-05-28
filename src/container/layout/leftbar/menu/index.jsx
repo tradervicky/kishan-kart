@@ -62,7 +62,7 @@ const MenuSideBar = ({ lang }) => {
           <li key={index}>
             <NavLink
               to={data.toLink}
-              className={({ isActive }) => isActive ? "flex p-4 bg-dark-200 items-center gap-4 active-sidebar-item" : "flex p-4 items-center gap-4"}
+              className={({ isActive }) => isActive ? "flex p-4 bg-dark-400 items-center gap-4 active-sidebar-item" : "flex p-4 items-center gap-4"}
             >
               {data.icon}
               {lang ? data.title : data.titleHindi}
@@ -74,7 +74,7 @@ const MenuSideBar = ({ lang }) => {
           <li key={index}>
             <NavLink
               to={data.toLink}
-              className={({ isActive }) => isActive ? "flex p-4 bg-dark-200 items-center gap-4 text-custom-h6 font-medium active-sidebar-item" : "flex p-4 items-center gap-4 text-custom-h6 font-medium"}
+              className={({ isActive }) => isActive ? "flex p-4 bg-dark-400 items-center gap-4 text-custom-h6 font-medium active-sidebar-item" : "flex p-4 items-center gap-4 text-custom-h6 font-medium"}
             >
               {data.icon}
               {lang ? data.title : data.titleHindi}

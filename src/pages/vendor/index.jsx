@@ -10,6 +10,7 @@ import { makeApiRequest } from '../../api/function';
 import { API_URLS } from '../../api/auth';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { hideLoader, showLoader } from '../../components/loader';
 
 
 const Vendors = () => {
@@ -17,10 +18,12 @@ const Vendors = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate()
   const fetchVendors = async ()=>{
+    showLoader()
     try {
       const response = await makeApiRequest("GET", API_URLS.GET_VENDOR_LIST)
       // console.log(response)
       setVendors(response)
+      hideLoader()
     } catch (error) {
       console.error(error)
     }

@@ -4,15 +4,18 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { API_URLS } from '../../../api/auth';
 import { makeApiRequest } from '../../../api/function';
+import { hideLoader, showLoader } from '../../../components/loader';
 import UserButton from '../../../components/userButton';
 const UserCards = () => {
   const [cards, setCards] = useState([])
   const id = useParams()
   const fetchCards = async ()=>{
+    showLoader()
     try {
         // `${API_URLS.VIEW_USER_BY_ID}${id.id}`
       const response = await makeApiRequest("GET", `${API_URLS.VIEW_CARD_BY_USER}${id.id}`)
       console.log(response)
+      hideLoader()
       setCards(response)
     } catch (error) {
       console.error(error)

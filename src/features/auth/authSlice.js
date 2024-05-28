@@ -1,5 +1,6 @@
 // src/features/auth/authSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { API_URLS } from '../../api/auth';
 import { makeApiRequest } from '../../api/function';
 // import { makeApiRequest } from '../../api/api';
@@ -29,8 +30,11 @@ export const register = createAsyncThunk(
   async (userInfo, thunkAPI) => {
     try {
       const data = await makeApiRequest('POST', API_URLS.SIGNUP, userInfo);
+      toast.success('Registration successful!');
       return data;
     } catch (error) {
+      toast.error(error.message);
+      // console.log()
       return thunkAPI.rejectWithValue(error);
     }
   }

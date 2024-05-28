@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { API_URLS } from '../../api/auth'
 import { makeApiRequest } from '../../api/function'
+import { hideLoader, showLoader } from '../../components/loader'
 import UserButton from '../../components/userButton'
 import Cards from '../card'
 import UserCards from './userCard'
@@ -24,9 +25,11 @@ const CardPage = () => {
   },[selectedCard])
 
   const  handleAddCard = async ()=>{
+    showLoader()
     try {
       const response = await makeApiRequest("POST", API_URLS.ADD_CARD, cardData)
       console.log(response)
+      hideLoader()
       setSelectedCard("")
     } catch (error) {
       console.error(error)

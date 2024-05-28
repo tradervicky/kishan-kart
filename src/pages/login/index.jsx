@@ -22,6 +22,7 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [isButtondisabled, setIsButtonDisabled] = useState(false)
 
   const handleSetGuestCredentials = ()=>{
     setFormData({
@@ -33,11 +34,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     toast.loading('Logging in...', { id: 'login' });
+    
     dispatch(login(formData)).then((action) => {
       toast.dismiss('login');
+      setIsButtonDisabled(true)
       if (action.meta.requestStatus === 'fulfilled') {
+        console.log(typeof(action.meta.requestStatus))
         toast.success("Logged in Successfully");
         setTimeout(() => {
+          setIsButtonDisabled(false)
           navigate('/dashboard');
         }, 1000);
       } else {
@@ -109,7 +114,7 @@ const Login = () => {
             Register
           </button>
           <button
-            className="text-white hover:text-gray-300 text-sm"
+            className={`text-white hover:text-gray-300 text-sm  ${isButtondisabled ? disabled : ""}`}
             type="button"
           >
             Forgot Password?

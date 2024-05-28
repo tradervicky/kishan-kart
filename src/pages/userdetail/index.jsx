@@ -8,15 +8,18 @@ import { SlCalender } from "react-icons/sl";
 import { useNavigate, useParams } from "react-router-dom";
 import { makeApiRequest } from "../../api/function";
 import { API_URLS } from "../../api/auth";
+import { hideLoader, showLoader } from "../../components/loader";
 const UserDetails = () => {
   const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState([])
   const id = useParams()
   // console.log(id)
   const fetchData = async () => {
+    showLoader()
     try {
       const response = await makeApiRequest("GET", `${API_URLS.VIEW_USER_BY_ID}${id.id}`);
       console.log(response);
+      hideLoader()
       setUserDetails(response)
     } catch (error) {
       console.error('Error fetching user data:', error);
