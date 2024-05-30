@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import CustomAreaChart from '../../components/charts/Area';
+import CustomBarChart from '../../components/charts/Bar';
 import CustomPieChart from '../../components/charts/Pie';
 
 const Dashboard = () => {
@@ -49,6 +50,7 @@ const Dashboard = () => {
         data={pieData}
         chartTitle="Activated vs Deactivated Cards"
       />
+      <CustomBarChart/>
     </div>
   );
 }
