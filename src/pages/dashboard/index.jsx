@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import CustomAreaChart from '../../components/charts/Area';
 import CustomBarChart from '../../components/charts/Bar';
 import CustomPieChart from '../../components/charts/Pie';
+import { FaUsers } from "react-icons/fa6";
+import { FaShopify } from "react-icons/fa";
 
 const Dashboard = () => {
   const [chartData, setChartData] = useState([
@@ -39,17 +41,34 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className='text-white'>
-      <CustomAreaChart
+    <div className='text-white '>
+      <div className='flex gap-4 mx-6'>
+        <div className='bg-green-500 border h-[250px] p-4 w-1/3 flex flex-col gap-2 justify-center items-center'>
+          <FaUsers size={36}/>
+          <p className='text-xl font-semibold'>9</p>
+          <span className='text-lg font-medium'>Total Customer</span>
+        </div>
+        <div className='bg-blue-500 border h-[250px] p-4 w-1/3 flex flex-col gap-2 justify-center items-center'>
+          <FaShopify size={36}/>
+          <p className='text-xl font-semibold'>12</p>
+          <span className='text-lg font-medium'>Total Product</span>
+        </div>
+        <div className=' border h-[250px] p-4 w-1/3 flex flex-col gap-2 justify-center items-center'>
+        <CustomPieChart
+        data={pieData}
+        chartTitle="Cards"
+      />
+        </div>
+      </div>
+        <CustomAreaChart
         data={chartData}
         xAxisKey="date"
         areaKey="sales"
         chartTitle="Sales Over Time"
+        height="100%"
       />
-      <CustomPieChart
-        data={pieData}
-        chartTitle="Activated vs Deactivated Cards"
-      />
+      
+      
       <CustomBarChart/>
     </div>
   );

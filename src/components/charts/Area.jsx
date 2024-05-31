@@ -9,14 +9,14 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
-const CustomAreaChart = ({ data, xAxisKey, areaKey, chartTitle }) => {
+const CustomAreaChart = ({ data, xAxisKey, areaKey, chartTitle, height }) => {
   return (
-    <div style={{ width: '100%', height: 300 }}>
+    <div style={{ width: '100%', height: height }}>
       <h2>{chartTitle}</h2>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={data}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey={xAxisKey} />
