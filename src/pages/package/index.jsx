@@ -1,5 +1,7 @@
 import React from "react";
 import PackageCard from "../../components/packageCard";
+import InvoiceAccordian from "../getinvoice/invoiceAccordian";
+import InvoiceTable from "../getinvoice/invoiceTable";
 
 const Package = () => {
   return (
@@ -16,6 +18,11 @@ const Package = () => {
         <PackageCard />
         <PackageCard />
         <PackageCard />
+      </div>
+      <div className="mr-4">
+
+      <InvoiceAccordian/>
+      <InvoiceTable/>
       </div>
     </div>
   );
