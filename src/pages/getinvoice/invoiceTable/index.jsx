@@ -1,20 +1,37 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { CiViewList } from "react-icons/ci";
 import { FaAngleDown, FaAngleRight, FaAngleUp } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import { API_URLS } from "../../../api/auth";
+import { makeApiRequest } from "../../../api/function";
 import UserButton from "../../../components/userButton";
 
 const InvoiceTable = () => {
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false);
+  const {id} = useParams()
+  const [useerData, setUserData] = useState([])
+  const fetchUserData = async ()=>{
+    try {
+      const response = await makeApiRequest("GET" ,`${API_URLS.VIEW_USER_BY_ID}${id}` )
+      console.log(response)
+    } catch (error) {
+      
+    }
+  }
+  useEffect(()=>{
+    fetchUserData()
+  },[])
+
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
-  const handleClick = (data)=>{
-    console.log(data)
-  }
+  
 
   return (
-    <div className="mt-4 bg-white shadow-md rounded-lg">
+    <div className="mt-4 bg-white shadow-md rounded-lg overflow-hidden ml-6 mr-2">
       <table className="w-full">
         <thead className="bg-gray-100">
           <tr className="text-left text-gray-700">
@@ -30,7 +47,7 @@ const InvoiceTable = () => {
           <tr className="border-b hover:bg-gray-50">
             <td className="py-2 px-4">
               <button onClick={toggleOpen}>
-                {isOpen ? <FaAngleDown /> : <FaAngleRight />}
+                {isOpen ? <FaAngleDown size={18} /> : <FaAngleRight size={18} />}
               </button>
             </td>
             <td className="py-2 px-4">25-05-2024</td>
@@ -38,7 +55,7 @@ const InvoiceTable = () => {
             <td className="py-2 px-4">vendoremail@test.in</td>
             <td className="py-2 px-4">25000/-</td>
             <td className="py-2 px-4">
-            <UserButton onClick={()=>handleClick('/users/get-invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/> 
+            <UserButton onClick={()=>navigate('/users/invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/> 
             </td>
           </tr>
           {isOpen && (

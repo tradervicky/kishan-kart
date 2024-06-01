@@ -1,9 +1,10 @@
 import React from "react";
 import PackageCard from "../../components/packageCard";
-import InvoiceAccordian from "../getinvoice/invoiceAccordian";
 import InvoiceTable from "../getinvoice/invoiceTable";
+import {gold,platinum,diamond} from '../../components/packageCard/packageData'
 
 const Package = () => {
+  console.log(gold, platinum,diamond)
   return (
     <div className=" my-6  mt-6 mx-6 ">
       <div className="flex flex-col justify-center my-4">
@@ -15,14 +16,14 @@ const Package = () => {
         </span>
       </div>
       <div className="md:grid-cols-2 lg:grid-cols-3 grid gap-4">
-        <PackageCard />
-        <PackageCard />
-        <PackageCard />
+        <PackageCard data={gold} image={'/gold.png'}/>
+        <PackageCard data={platinum} image={'/platinum.png'}/>
+        <PackageCard data={diamond} image={'/diamond.png'}/>
       </div>
       <div className="mr-4">
 
-      <InvoiceAccordian/>
-      <InvoiceTable/>
+    
+      
       </div>
     </div>
   );

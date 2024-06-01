@@ -10,6 +10,7 @@ import Cards from '../pages/card';
 import CardPage from '../pages/cardpage';
 import Dashboard from '../pages/dashboard';
 import GetInvoice from '../pages/getinvoice';
+import InvoiceTable from '../pages/getinvoice/invoiceTable';
 import Login from '../pages/login';
 import Package from '../pages/package';
 import ProductPage from '../pages/productPage';
@@ -47,7 +48,8 @@ const protectedRoutes = [
   // { path: '/get-invoice/:id', element: <GetInvoice /> },
   { path: '/vendors/add-vendor', element: <AddUser /> },
   { path: '/users/add-user', element: <AddCustomer /> },
-  { path: '/users/get-invoice/:id', element: <Invioce /> },
+  { path: '/users/get-invoice/:id', element: <InvoiceTable /> },
+  { path: '/users/invoice/:id', element: <Invioce /> },
   { path: '/vendors/vendors-edit/:id', element: <AddUser /> },
   { path: '*', element: <Dashboard /> },
   //inside products

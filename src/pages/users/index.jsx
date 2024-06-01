@@ -90,7 +90,7 @@ const columns = [
       <div className="flex gap-1 text-sm font-semibold items-center">   
         <UserButton onClick={()=>handleClick(`user-details/${params.row.userId}`)} icon={<CiViewList size={20}/>} title="Details" customStyle="text-green-500"/>
         <UserButton onClick={()=>handleClick(`/users/add-cards/${params.row.userId}`)} icon={<LiaIdCardSolid size={20}/>} title="Cards" customStyle="text-[#DDA0DD]"/>
-        <UserButton onClick={()=>handleClick('/users/get-invoice/1')} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/> 
+        <UserButton onClick={()=>handleClick(`/users/get-invoice/${params.row.userId}`)} icon={<CiViewList size={20} />} title="Get Invoice" customStyle="text-[#6699CC]"/> 
       </div>
     )
   },
@@ -101,7 +101,7 @@ const columns = [
 // ];
 
 const handleClick = (route)=>{
-  console.log("clicked")
+  // console.log("clicked")
   navigate(route)  
 }
 
