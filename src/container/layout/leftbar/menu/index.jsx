@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MdOutlineSpaceDashboard, MdOutlineAddShoppingCart } from "react-icons/md";
 import { FaUsers, FaRegAddressCard } from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MenuSideBar = ({ lang }) => {
   const navigate = useNavigate();
+  const [activeItem, setActiveItem] = useState("/dashboard");
 
   const menuDashboard = [
     {
@@ -31,7 +32,7 @@ const MenuSideBar = ({ lang }) => {
       toLink: "/cards",
     },
     {
-      title: "vendor list",
+      title: "Vendor list",
       titleHindi: "विक्रेता सूची",
       icon: <CiShop size={18} />,
       toLink: "/vendors",
@@ -57,6 +58,7 @@ const MenuSideBar = ({ lang }) => {
   ];
 
   const handleNavigation = (toLink) => {
+    setActiveItem(toLink);
     navigate(toLink);
   };
 
@@ -68,7 +70,7 @@ const MenuSideBar = ({ lang }) => {
           <li key={index}>
             <button
               onClick={() => handleNavigation(data.toLink)}
-              className="flex p-4 items-center gap-4 w-full text-left hover:bg-dark-400 active:bg-dark-500"
+              className={`flex p-4 items-center gap-4 w-full text-left ${activeItem === data.toLink ? 'bg-dark-400' : ''}`}
             >
               {data.icon}
               {lang ? data.title : data.titleHindi}
@@ -80,7 +82,7 @@ const MenuSideBar = ({ lang }) => {
           <li key={index}>
             <button
               onClick={() => handleNavigation(data.toLink)}
-              className="flex p-4 items-center gap-4 w-full text-left text-custom-h6 font-medium hover:bg-dark-400 active:bg-dark-500"
+              className={`flex p-4 items-center gap-4 w-full text-left text-custom-h6 font-medium ${activeItem === data.toLink ? 'bg-dark-400' : ''}`}
             >
               {data.icon}
               {lang ? data.title : data.titleHindi}
