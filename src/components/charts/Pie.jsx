@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
+import './CustomBarChart.css';
 
 const COLORS = ['#0088FE', '#FF8042'];
 const CustomPieChart = ({ data, chartTitle }) => {
@@ -28,7 +29,7 @@ const CustomPieChart = ({ data, chartTitle }) => {
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />}/>
         </PieChart>
         <Legend />
       </ResponsiveContainer>
@@ -37,3 +38,15 @@ const CustomPieChart = ({ data, chartTitle }) => {
 };
 
 export default CustomPieChart;
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label" style={{ color: '#fff', backgroundColor:"#333", padding:"8px", borderRadius:"12px" }}>{`${payload[0].name} : ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};

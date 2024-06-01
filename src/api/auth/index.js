@@ -21,7 +21,10 @@ export const API_URLS = {
     ADD_CARD : "/api/cards/add",
     VIEW_ALL_CARDS : "/api/cards",
     VIEW_CARD_BY_USER : "/api/cards/user/",
-    UPDATE_CARD : "/api/cards/update/"
+    UPDATE_CARD : "/api/cards/update/",
     
+    //dashboard 
+    VIEW_DASHBOARD : "/api/dashboard/stats"
   };
+
   

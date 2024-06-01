@@ -21,6 +21,6 @@ export const makeApiRequest = async (method, url, data = null, params = null, ad
     });
     return response.data;
   } catch (error) {
-    throw error.response ? error.response.data : error;
+    throw error.response ? error.response.data : error
   }
 };
