@@ -1,11 +1,13 @@
 import React from 'react';
 import { MdOutlineSpaceDashboard, MdOutlineAddShoppingCart } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
 import { FaUsers, FaRegAddressCard } from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
 import { LiaShoppingBagSolid } from "react-icons/lia";
+import { useNavigate } from 'react-router-dom';
 
 const MenuSideBar = ({ lang }) => {
+  const navigate = useNavigate();
+
   const menuDashboard = [
     {
       title: "Dashboard",
@@ -54,31 +56,35 @@ const MenuSideBar = ({ lang }) => {
     },
   ];
 
+  const handleNavigation = (toLink) => {
+    navigate(toLink);
+  };
+
   return (
     <div>
       <ul>
         <p className='text-custom-h6 text-mixed-600 p-2'>Menu</p>
         {menuDashboard.map((data, index) => (
           <li key={index}>
-            <NavLink
-              to={data.toLink}
-              className={({ isActive }) => isActive ? "flex p-4 bg-dark-400 items-center gap-4 active-sidebar-item" : "flex p-4 items-center gap-4"}
+            <button
+              onClick={() => handleNavigation(data.toLink)}
+              className="flex p-4 items-center gap-4 w-full text-left hover:bg-dark-400 active:bg-dark-500"
             >
               {data.icon}
               {lang ? data.title : data.titleHindi}
-            </NavLink>
+            </button>
           </li>
         ))}
         <p className='text-custom-h6 text-mixed-600 p-2'>Components</p>
         {menuForSideBar.map((data, index) => (
           <li key={index}>
-            <NavLink
-              to={data.toLink}
-              className={({ isActive }) => isActive ? "flex p-4 bg-dark-400 items-center gap-4 text-custom-h6 font-medium active-sidebar-item" : "flex p-4 items-center gap-4 text-custom-h6 font-medium"}
+            <button
+              onClick={() => handleNavigation(data.toLink)}
+              className="flex p-4 items-center gap-4 w-full text-left text-custom-h6 font-medium hover:bg-dark-400 active:bg-dark-500"
             >
               {data.icon}
               {lang ? data.title : data.titleHindi}
-            </NavLink>
+            </button>
           </li>
         ))}
       </ul>

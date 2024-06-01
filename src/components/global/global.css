@@ -13,3 +13,25 @@
     border-radius: 3px; 
   }
   
+
+  /* Add these styles to your global.css or a specific CSS module for the Leftbar */
+
+.leftbar {
+  position: relative; /* Ensure it's on top of other elements */
+  z-index: 10; /* Adjust z-index to ensure it's above other elements */
+}
+
+.leftbar .menu-item {
+  position: relative;
+  z-index: 11; /* Ensure menu items are above the sidebar */
+}
+
+.leftbar .logout-button {
+  position: relative;
+  z-index: 11; /* Ensure the logout button is above the sidebar */
+}
+
+.leftbar .logo {
+  position: relative;
+  z-index: 11; /* Ensure the logo is above the sidebar */
+}
