@@ -12,12 +12,15 @@ const Topbar = () => {
   const authError = useSelector((state) => state.auth.error);
   // console.log(user)
   // console.log(params)
+  const handleFocus = ()=>{
+    navigate('/products')
+  }
   return (
     <div>
     <div className="bg-mixed-200  flex justify-between h-16 items-center px-6">
         <div className="flex items-center">
             <input type="text" placeholder="Search for product"  className="px-4 py-2 bg-mixed-300 
-            rounded-l-xl outline-none text-white"/>
+            rounded-l-xl outline-none text-white" onFocus={handleFocus} />
             <div className="text-white py-2 px-2 bg-mixed-300 rounded-r-xl">
             <IoIosSearch size={24} className="cursor-pointer"/>
             </div>

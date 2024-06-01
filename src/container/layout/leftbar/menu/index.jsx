@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineSpaceDashboard, MdOutlineAddShoppingCart } from "react-icons/md";
 import { FaUsers, FaRegAddressCard } from "react-icons/fa";
 import { CiShop } from "react-icons/ci";
 import { LiaShoppingBagSolid } from "react-icons/lia";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MenuSideBar = ({ lang }) => {
   const navigate = useNavigate();
-  const [activeItem, setActiveItem] = useState("/dashboard");
+  // const [activeItem, setActiveItem] = useState("/dashboard");
+  const location = useLocation();
 
+  const [activeItem, setActiveItem] = useState(location.pathname);
+
+  // Update activeItem when the location changes
+  useEffect(() => {
+    setActiveItem(location.pathname);
+  }, [location]);
   const menuDashboard = [
     {
       title: "Dashboard",
@@ -58,7 +65,7 @@ const MenuSideBar = ({ lang }) => {
   ];
 
   const handleNavigation = (toLink) => {
-    setActiveItem(toLink);
+    // setActiveItem(toLink);
     navigate(toLink);
   };
 
