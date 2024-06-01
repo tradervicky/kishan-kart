@@ -12,6 +12,7 @@ import Dashboard from '../pages/dashboard';
 import GetInvoice from '../pages/getinvoice';
 import Login from '../pages/login';
 import Package from '../pages/package';
+import ProductPage from '../pages/productPage';
 import Products from '../pages/products';
 import Register from '../pages/register';
 import UserDetails from '../pages/userdetail';
@@ -49,8 +50,8 @@ const protectedRoutes = [
   { path: '/users/get-invoice/:id', element: <Invioce /> },
   { path: '/vendors/vendors-edit/:id', element: <AddUser /> },
   { path: '*', element: <Dashboard /> },
-  //inside add product
-  // { path: '/add-product' element: </> },
+  //inside products
+  { path: '/products/:id', element: <ProductPage/> },
 
 ];
 
