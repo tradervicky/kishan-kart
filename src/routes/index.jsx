@@ -19,7 +19,7 @@ import Register from '../pages/register';
 import UserDetails from '../pages/userdetail';
 import Users from '../pages/users';
 import AddCustomer from '../pages/users/add';
-import UserUpdate from '../pages/userUpdate';
+// import UserUpdate from '../pages/userUpdate';
 import Vendors from '../pages/vendor';
 import VendorDetails from '../pages/vendor/vendorDetails';
 

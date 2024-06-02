@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { API_URLS } from "../../api/auth";
 import { makeApiRequest } from "../../api/function";
@@ -89,6 +90,7 @@ useEffect(()=>{
 console.log(productDetails)
   return (
     <div className=" mx-6 shadow-2xl h-[84vh]">
+      <Toaster/>
       <div className="flex justify-between px-4 pt-4 h-[98%]">
         <div className="w-[29%] h-full">
           <div className="flex flex-col justify-center items-center h-[50%] bg-white rounded-lg shadow-lg">

@@ -40,9 +40,9 @@ const Topbar = () => {
         </div>
     </div>
     <div className="bg-mixed-300  h-10 mx-6  flex items-center pl-6">
-      <p className="text-white pr-2 cursor-pointer"> <Link to={'/'}>Home &gt;</Link></p>
+      <p className="text-white pr-2 cursor-pointer"> <Link className="pr-2 hover:text-primary-400" to={'/'}>Home </Link>&gt;</p>
       {pathnames && pathnames.map((data, index)=>
-        (<p key={index} className={`text-white  ${!(pathnames.length === index+1) ? 'cursor-pointer pr-2' : ''}`}> {!(pathnames.length === index+1) ? <Link to={data}> {data} </Link>: data }
+        (<p key={index} className={`text-white  ${!(pathnames.length === index+1) ? 'cursor-pointer pr-2' : ''}`}> {!(pathnames.length === index+1) ? <Link className="hover:text-primary-400" to={data} > {data} </Link>: data }
         <span className="cursor-default pl-2 pr-2"> {(pathnames.length === index+1) ? "" :">"}</span></p>))}
     </div>
     </div>
