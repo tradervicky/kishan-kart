@@ -1,6 +1,6 @@
 import { IoPersonOutline } from "react-icons/io5";
 import { IoIosSearch } from "react-icons/io";
-import {useNavigate, useParams} from 'react-router-dom'
+import {Link, useLocation, useNavigate, useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 const Topbar = () => {
   const params = useParams()
@@ -12,9 +12,14 @@ const Topbar = () => {
   const authError = useSelector((state) => state.auth.error);
   // console.log(user)
   // console.log(params)
+  const location = useLocation();
+  const pathnames = location.pathname.split('/').filter((x) => x);
+  
+  console.log(pathnames)
   const handleFocus = ()=>{
     navigate('/products')
   }
+
   return (
     <div>
     <div className="bg-mixed-200  flex justify-between h-16 items-center px-6">
@@ -35,7 +40,10 @@ const Topbar = () => {
         </div>
     </div>
     <div className="bg-mixed-300  h-10 mx-6  flex items-center pl-6">
-        <p className="text-white">Home &gt; User</p>
+      <p className="text-white pr-2 cursor-pointer"> <Link to={'/'}>Home &gt;</Link></p>
+      {pathnames && pathnames.map((data, index)=>
+        (<p key={index} className={`text-white  ${!(pathnames.length === index+1) ? 'cursor-pointer pr-2' : ''}`}> {!(pathnames.length === index+1) ? <Link to={data}> {data} </Link>: data }
+        <span className="cursor-default pl-2 pr-2"> {(pathnames.length === index+1) ? "" :">"}</span></p>))}
     </div>
     </div>
   )
