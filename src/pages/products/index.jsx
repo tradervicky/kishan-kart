@@ -12,6 +12,9 @@ const Products = () => {
     try {
       const response = await makeApiRequest("GET", API_URLS.GET_ALL_PRODUCTS)
       console.log(response)
+      if(response){
+        fetchVendorData()
+      }
       hideLoader()
       setProducts(response)
     } catch (error) {
@@ -20,7 +23,19 @@ const Products = () => {
   }
   useEffect(()=>{
     fetchProducts()
+    
   },[])
+
+  const fetchVendorData = async()=>{
+    const id = products 
+    console.log(id)
+    try{
+      const response = await makeApiRequest("GET", `${API_URLS.GET_VENDOR_BY_ID}${id}`)
+      console.log(response)
+    }catch(error){
+      console.error(error)
+    }
+  }
   return (
     <div className='text-white mx-6'>
       <div className='grid grid-cols-4'>
@@ -28,7 +43,7 @@ const Products = () => {
           products.map((data, index)=>
           (<div key={index}>
            
-            <ProductCard title={data.title} price = {data.price} image={data.image} description = {data.description} category= {data.category} subCategory={data.subCategory} quantity={data.quantity} productID ={data._id}/>
+            <ProductCard title={data.title} price = {data.price} image={data.image} description = {data.description} category= {data.category} subCategory={data.subCategory} sellerName={data.vendorName} quantity={data.quantity} productID ={data._id}/>
           </div>)
           )
         }

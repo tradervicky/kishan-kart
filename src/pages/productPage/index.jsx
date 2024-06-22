@@ -37,10 +37,10 @@ const ProductPage = () => {
           <p className="text-md text-white mb-2"><span className="font-semibold text-gray-400">Sub-Category:</span> {productData.subCategory && productData.subCategory}</p>
           <p className="text-sm text-white mb-4 italic"><span className="font-semibold text-gray-400 not-italic  text-md">Description:</span> {productData.description && productData.description}</p>
           <p className="text-2xl text-white font-bold mb-4"><span className="font-semibold text-gray-400">Price:</span> {productData.price && productData.price}/-</p>
-          <p className="text-lg text-white mb-4 "><span className="font-semibold text-primary-200">Seller:</span> Amar Nath Sharma</p>
+          <p className="text-lg text-white mb-4 "><span className="font-semibold text-primary-200">Seller:</span> {productData.vendorName && productData.vendorName}</p>
           <div className='flex gap-4'>
             <FiPhoneCall size={36} color={"green"}/>
-            <p className=" text-white mb-4 text-2xl "><span className='text-3xl pr-2 text-green-700'>  ORDER NOW :</span>7631548156</p> 
+            <p className=" text-white mb-4 text-2xl "><span className='text-3xl pr-2 text-green-700'>  ORDER NOW :</span>{productData.vendorMobile && productData.vendorMobile}</p> 
           </div>
         </div>
       </div>

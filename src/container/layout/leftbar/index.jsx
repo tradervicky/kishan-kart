@@ -34,7 +34,7 @@ const Leftbar = () => {
       <div>
         <MenuSideBar lang={lang} />
       </div>
-      <div>
+      <div className='mt-2'>
         <button onClick={handleLogout} className='px-6 py-3 mb-2 bg-primary-200 rounded-lg text-custom-h6 font-semibold hover:bg-primary-100 ease-in-out duration-300'>
           {lang ? "Log out" : "लॉग आउट"}
         </button>

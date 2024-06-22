@@ -1,15 +1,18 @@
 import React, { useState, useRef } from "react";
 import { useEffect } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { API_URLS } from "../../api/auth";
 import { makeApiRequest } from "../../api/function";
 import InputBox from "../../components/input";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [productDetails, setProductDetails] = useState({
     title: "",
     vendor: "",
+    vendorName: "",
+    vendorMobile: "",
     image: "",
     price: "",
     category: "",
@@ -20,7 +23,8 @@ const AddProduct = () => {
   const [vendorList, setVendorList] = useState([])
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === "file") {
@@ -49,10 +53,14 @@ const AddProduct = () => {
   };
 
   const handleAdd = async () => {
+    setLoading(true);
+    toast.loading("Adding product...");
     const formData = new FormData();
 
     formData.append("title", productDetails.title);
     formData.append("vendor", productDetails.vendor);
+    formData.append("vendorName", productDetails.vendorName);
+    formData.append("vendorMobile", productDetails.vendorMobile);
     formData.append("image", productDetails.image);
     formData.append("price", productDetails.price);
     formData.append("category", productDetails.category);
@@ -69,11 +77,28 @@ const AddProduct = () => {
           "Content-Type": "multipart/form-data",
         }
       );
-      console.log(response);
+      toast.dismiss();
+      toast.success("Product added successfully!");
+      navigate("/products");
     } catch (error) {
-      console.error(error);
+      toast.dismiss();
+      toast.error("Error adding product. Please try again.");
+      setLoading(false);
     }
   };
+  console.log(productDetails)
+// vendor data
+const handleVendorChange = (e) => {
+  const selectedVendorId = e.target.value;
+  const selectedVendor = vendorList.find(vendor => vendor._id === selectedVendorId);
+  setProductDetails({
+    ...productDetails,
+    vendor: selectedVendorId,
+    vendorName: selectedVendor ? selectedVendor.name : "",
+    vendorMobile: selectedVendor ? selectedVendor.mobile:  "",
+  });
+};
+
 // fetch vendor list
 const fetchVendors = async ()=>{
   try {
@@ -144,7 +169,7 @@ console.log(productDetails)
               </label>
               <select
                 name="vendor"
-                onChange={handleChange}
+                onChange={handleVendorChange}
                 value={productDetails.vendor}
                 className="py-2 border-b bg-dark-400 text-lg text-white outline-none">
                 <option value="">Select Vendor</option>
@@ -203,8 +228,9 @@ console.log(productDetails)
             <button
               className="px-4 py-2 bg-blue-600 w-[50%] text-lg font-semi-bold text-white hover:bg-blue-500 mt-4 duration-300 ease-in-out"
               onClick={handleAdd}
+              disabled={loading}
             >
-              Add Product
+              {loading ? "Adding..." : "Add Product"}
             </button>
           </div>
         </div>
